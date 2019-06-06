@@ -1,5 +1,6 @@
 <template>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <div class="login-title">登录</div>
         <el-form-item label="账号" prop="name">
             <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
@@ -70,6 +71,11 @@
     .demo-ruleForm {
         width: 500px;
         margin: 200px auto;
+        .login-title {
+            text-align: center;
+            color: #0ff;
+            padding-bottom: 30px;
+        }
         .login-btn {
             text-align: center ;
         }
