@@ -1,35 +1,31 @@
 <template>
   <div id="app">
-    <router-link to="/login">登陆</router-link>
+    <!-- <router-link to="/login">登陆</router-link> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  mounted() {
-    //请求接口测试
-    // axios({
-    //   url:"https://api.github.com/users",
-    //   method:'get',
-    //   params:  {
-    //     abc:123
-    //   }
-    // }).then(res=>{
-      
-    //   console.log(res)
-    // })
-
-    // this.$axios({
-    //   url:"https://api.github.com/users",
-    //   method:"get"
-    // }).then(res=>{
-    //   console.log(res)
-    // })
-  },
+  
 }
 </script>
 
 <style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
 
+  ul,li,ol {
+    list-style: none;
+  }
+
+  a {
+    color: #333;
+  }
+
+  i,em {
+    font-style: normal;
+  }
 </style>

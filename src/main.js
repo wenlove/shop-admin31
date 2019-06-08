@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 //导入组件
 import Login from './pages/Login.vue';
-
+import Admin from './pages/Admin.vue';
 
 //注册组件
 Vue.use(ElementUI);
@@ -23,6 +23,7 @@ Vue.prototype.$axios = axios;
 //配置与创建路由实例
 const router = new VueRouter({
     routes: [
+        { path: '/', component: Admin },
         { path: '/login', component: Login }
     ]
 })
