@@ -1,7 +1,6 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item v-for="(item,index) in info" :key="index">{{item}}</el-breadcrumb-item>
-    
   </el-breadcrumb>
 </template>
 
@@ -13,8 +12,18 @@ export default {
     };
   },
   watch: {
-    //监听路由变化，获取路由matched中的meta
+    //监听路由变化，获取路由信息
     $route() {
+      this.getRoute();
+    }
+  },
+  mounted() {
+    //组件加载完成获取路由信息
+    this.getRoute();
+  },
+  methods: {
+    //根据路由获取meta
+    getRoute() {
       // console.log(this.$route.matched);
       const arr = this.$route.matched;
       let info = [];
