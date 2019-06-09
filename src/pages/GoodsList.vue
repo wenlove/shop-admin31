@@ -6,6 +6,7 @@
         <el-button>新增</el-button>
         <el-button type="danger" @click="handleDeleteMore">删除</el-button>
       </div>
+      <!-- 搜索框部分 -->
       <div class="goods-search">
         <el-input placeholder="请输入内容" v-model="searchValue" class="input-with-select">
           <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
@@ -78,14 +79,13 @@ export default {
     //获取所有商品数据
     getList() {
       this.$axios({
-        url: `http://localhost:8899/admin/goods/getlist?pageIndex=${
-          this.pageIndex
-        }
-        &pageSize=${this.pageSize}
+        url: `http://localhost:8899/admin/goods/getlist?pageIndex=${this.pageIndex}&
+        pageSize=${this.pageSize}
         &searchvalue=${this.searchValue}`,
         method: "GET"
       }).then(res => {
         // console.log(res.data);
+        //解构赋值
         const { message, status } = res.data;
 
         if (status === 0) {
@@ -106,7 +106,6 @@ export default {
 
         if (status === 0) {
           this.$message.success(message);
-
           this.getList();
         } else {
           this.$message.error(message);
@@ -135,9 +134,9 @@ export default {
       this.getList();
     },
     //编辑
-    handleEdit(goods) {
-      // console.log(goods);
-    },
+    // handleEdit(goods) {
+    //   // console.log(goods);
+    // },
     //删除单条数据
     handleDelete(goods) {
       this.deleteList(goods.id);
@@ -150,13 +149,13 @@ export default {
       const ids = arr.join(",");
       this.deleteList(ids);
     },
-	
-	//处理搜素
-	handleSearch(){
-		
-		this.getList();
-	}
+
+    //处理搜素
+    handleSearch() {
+      this.getList();
+    }
   },
+  //页面加载时渲染
   mounted() {
     this.getList();
   }
