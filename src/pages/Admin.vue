@@ -8,7 +8,9 @@
         <Header @click="handleChangeShow"></Header>
       </el-header>
       <el-main>
-        <Breadcrumb></Breadcrumb>Main
+        <Breadcrumb></Breadcrumb>
+        
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>

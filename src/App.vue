@@ -22,7 +22,8 @@ export default {
   }
 
   a {
-    color: #333;
+    /* color: #333; */
+    text-decoration: none;
   }
 
   i,em {

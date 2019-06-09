@@ -8,12 +8,11 @@
       label-width="80px"
       class="demo-form"
     >
-      <!-- <div class="login-title">登录</div> -->
       <el-form-item label="账号" prop="username">
-        <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+        <el-input v-model="form.username" placeholder="请输入用户名" clearable></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="form.password" placeholder="请输入密码" autocomplete="off"></el-input>
+        <el-input type="password" v-model="form.password" placeholder="请输入密码" autocomplete="off" clearable></el-input>
       </el-form-item>
       <el-form-item class="login-btn">
         <el-button type="primary" @click="onSubmit('form')">提交</el-button>
