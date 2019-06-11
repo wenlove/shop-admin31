@@ -118,6 +118,7 @@ export default {
         fileList: [], //图片相册
         content: ""
       },
+      id:0,//数据id
       //所有类别
       categorys: [],
       imageUrl: "", //封面图片
@@ -145,16 +146,18 @@ export default {
 
     //图片相册删除
     handleRemove(file, fileList) {
-      console.log(fileList.length);
       if (fileList.length > 0) {
         const arr = fileList.map(v => {
-          return v.response;
+          return v;
         });
-        console.log(fileList.length);
         this.form.fileList = arr;
       } else {
         this.form.fileList = [];
       }
+
+      // this.form.fileList = this.form.fileList.filter(v => {
+      //   return file.name !== v.name;
+      // });
     },
     //图片相册预览
     handlePictureCardPreview(file) {
@@ -163,16 +166,12 @@ export default {
     },
     //图片相册上传成功
     handlePictureSuccess(res, file, fileList) {
-      file.response.shorturl = "/" + file.response.shorturl;
-      //   console.log(file.response)
-      this.form.fileList.push(file.response);
-      console.log(this.form.fileList);
+      this.form.fileList.push(res);
     },
 
     onSubmit() {
-      //   console.log("submit!");
       this.$axios({
-        url: "http://localhost:8899/admin/goods/edit/" + this.$route.params.id,
+        url: "http://localhost:8899/admin/goods/edit/" + this.id,
         method: "POST",
         data: this.form,
         // 处理session跨域
@@ -201,19 +200,30 @@ export default {
       }
     });
 
+    const id = this.$route.params.id;
+    this.id = id;
     //根据id获取商品数据
     this.$axios({
-      url:
-        "http://localhost:8899/admin/goods/getgoodsmodel/" +
-        this.$route.params.id,
+      url: `http://localhost:8899/admin/goods/getgoodsmodel/${id}`,
       method: "GET"
     }).then(res => {
       const { message, status } = res.data;
+      console.log(message);
+      const fileList = message.fileList.map(v => {
+        return {
+          ...v,
+          url: "http://127.0.0.1:8899" + v.shorturl
+        };
+      });
+      console.log(fileList);
+
       if (status == 0) {
         this.form = {
           ...message,
-          category_id: +message.category_id
+          category_id: +message.category_id,
+          fileList
         };
+
         this.imageUrl = message.imgList[0].url;
       }
     });
