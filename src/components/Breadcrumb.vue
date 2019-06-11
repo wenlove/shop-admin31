@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb separator="/">
+  <el-breadcrumb separator="/" class="breadcrumb">
     <el-breadcrumb-item v-for="(item,index) in info" :key="index">{{item}}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style>
+.breadcrumb {
+  margin-bottom: 20px;
+}
 .el-breadcrumb {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;

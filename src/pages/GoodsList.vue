@@ -3,7 +3,7 @@
     <!-- 商品列表顶部 -->
     <el-row type="flex" justify="space-between" class="goods-option">
       <div>
-        <el-button>新增</el-button>
+        <el-button @click="handleToGoodsAdd">新增</el-button>
         <el-button type="danger" @click="handleDeleteMore">删除</el-button>
       </div>
       <!-- 搜索框部分 -->
@@ -79,14 +79,13 @@ export default {
     //获取所有商品数据
     getList() {
       this.$axios({
-        url: `http://localhost:8899/admin/goods/getlist?pageIndex=${this.pageIndex}&
-        pageSize=${this.pageSize}
+        url: `http://localhost:8899/admin/goods/getlist?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}
         &searchvalue=${this.searchValue}`,
         method: "GET"
       }).then(res => {
-        // console.log(res.data);
         //解构赋值
         const { message, status } = res.data;
+        console.log(message);
 
         if (status === 0) {
           this.tableData = message;
@@ -112,7 +111,7 @@ export default {
         }
       });
     },
-    //选择每一项时候就触发
+    //点击多选按钮，选择每一项时候就触发
     handleSelectionChange(val) {
       this.selectGoods = val;
     },
@@ -134,9 +133,10 @@ export default {
       this.getList();
     },
     //编辑
-    // handleEdit(goods) {
-    //   // console.log(goods);
-    // },
+    handleEdit(goods) {
+      // console.log(goods);
+      this.$router.push('/admin/goods-edit/'+goods.id)
+    },
     //删除单条数据
     handleDelete(goods) {
       this.deleteList(goods.id);
@@ -153,6 +153,11 @@ export default {
     //处理搜素
     handleSearch() {
       this.getList();
+    },
+
+    //跳转到新增页面
+    handleToGoodsAdd(){
+      this.$router.push('/admin/goods-add')
     }
   },
   //页面加载时渲染
@@ -164,7 +169,7 @@ export default {
 
 <style scope>
 .goods-option {
-  margin: 20px 0;
+  margin: 0 0 20px;
 }
 .goods-search {
   width: 250px;
