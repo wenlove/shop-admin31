@@ -146,6 +146,7 @@ export default {
 
     //图片相册删除
     handleRemove(file, fileList) {
+      console.log(this.form.fileList)
       if (fileList.length > 0) {
         const arr = fileList.map(v => {
           return v;
@@ -154,6 +155,7 @@ export default {
       } else {
         this.form.fileList = [];
       }
+      console.log(this.form.fileList)
 
       // this.form.fileList = this.form.fileList.filter(v => {
       //   return file.name !== v.name;
@@ -218,7 +220,7 @@ export default {
           fileList: message.fileList.map(v => {
             return {
               ...v,
-              url: "http://127.0.0.1:8899" + v.shorturl
+              url: "http://localhost:8899" + v.shorturl
             };
           })
         };

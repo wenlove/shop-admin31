@@ -45,6 +45,37 @@ const router = new VueRouter({
     ]
 })
 
+router.beforeEach((to, from, next) => {
+
+    //请求接口判断是否登录
+    axios({
+        url: 'http://localhost:8899/admin/account/islogin',
+        method: 'GET',
+        // 处理session跨域
+        withCredentials: true
+    }).then(res => {
+        const { code } = res.data;
+
+        //访问登录页
+        if (to.path == '/login') {
+            // 判断是否登录
+            if (code == 'logined') {
+                next('/admin/goods-list');
+            } else {
+                next();
+            }
+        } else {
+            //访问非登录页面
+            if (code == 'logined') {
+                next();
+            } else {
+                next('/login');
+            }
+        }
+    })
+
+})
+
 Vue.config.productionTip = false;
 //根实例
 new Vue({
