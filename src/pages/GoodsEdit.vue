@@ -118,7 +118,7 @@ export default {
         fileList: [], //图片相册
         content: ""
       },
-      id:0,//数据id
+      id: 0, //数据id
       //所有类别
       categorys: [],
       imageUrl: "", //封面图片
@@ -165,7 +165,7 @@ export default {
       this.dialogVisible = true;
     },
     //图片相册上传成功
-    handlePictureSuccess(res, file, fileList) {
+    handlePictureSuccess(res, file) {
       this.form.fileList.push(res);
     },
 
@@ -180,6 +180,7 @@ export default {
         console.log(this.form);
         const { message, status } = res.data;
         if (status === 0) {
+          this.$message.success(message);
           this.$router.back();
         } else {
           this.$router.push("/login");
@@ -200,28 +201,26 @@ export default {
       }
     });
 
+    //根据id获取商品数据
     const id = this.$route.params.id;
     this.id = id;
-    //根据id获取商品数据
     this.$axios({
       url: `http://localhost:8899/admin/goods/getgoodsmodel/${id}`,
       method: "GET"
     }).then(res => {
       const { message, status } = res.data;
       console.log(message);
-      const fileList = message.fileList.map(v => {
-        return {
-          ...v,
-          url: "http://127.0.0.1:8899" + v.shorturl
-        };
-      });
-      console.log(fileList);
 
       if (status == 0) {
         this.form = {
           ...message,
           category_id: +message.category_id,
-          fileList
+          fileList: message.fileList.map(v => {
+            return {
+              ...v,
+              url: "http://127.0.0.1:8899" + v.shorturl
+            };
+          })
         };
 
         this.imageUrl = message.imgList[0].url;

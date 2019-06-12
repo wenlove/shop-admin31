@@ -143,6 +143,11 @@ export default {
     },
     //删除多条数据
     handleDeleteMore() {
+      //判断是否选中
+      if(!this.selectGoods.length){
+        return;
+      }
+
       const arr = this.selectGoods.map(v => {
         return v.id;
       });
