@@ -37,6 +37,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        drag
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -67,6 +68,8 @@
         :on-remove="handleRemove"
         :on-success="handlePictureSuccess"
         :file-list="form.fileList"
+        drag
+        multiple
       >
         <i class="el-icon-plus"></i>
       </el-upload>
@@ -167,8 +170,10 @@ export default {
       this.dialogVisible = true;
     },
     //图片相册上传成功
-    handlePictureSuccess(res, file) {
-      this.form.fileList.push(res);
+    handlePictureSuccess(res, file,fileList) {
+      setTimeout(()=>{
+         this.form.fileList.push(res)
+      },10)
     },
 
     onSubmit() {
@@ -179,7 +184,7 @@ export default {
         // 处理session跨域
         withCredentials: true
       }).then(res => {
-        console.log(this.form);
+        // console.log(this.form);
         const { message, status } = res.data;
         if (status === 0) {
           this.$message.success(message);
@@ -211,7 +216,7 @@ export default {
       method: "GET"
     }).then(res => {
       const { message, status } = res.data;
-      console.log(message);
+      // console.log(message);
 
       if (status == 0) {
         this.form = {
@@ -237,7 +242,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -260,6 +265,12 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+
+.el-upload-dragger{
+  width: 146px;
+  height: 146px;
+  border: 0 ;
 }
 
 .editor .ql-toolbar {

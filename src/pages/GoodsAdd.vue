@@ -37,6 +37,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        drag
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -66,6 +67,8 @@
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
         :on-success="handlePictureSuccess"
+        drag
+        multiple
       >
         <i class="el-icon-plus"></i>
       </el-upload>
@@ -156,10 +159,9 @@ export default {
     },
     //图片相册上传成功
     handlePictureSuccess(res, file, fileList) {
-      const arr = fileList.map(v => {
-        return v.response;
-      });
-      this.form.fileList = arr;
+      setTimeout(()=>{
+         this.form.fileList.push(res)
+      },10)
     },
 
     onSubmit() {
@@ -225,6 +227,17 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+.el-upload-dragger{
+  width: 146px;
+  height: 146px;
+  border: 0 ;
+}
+
+
+.avatar-uploader .el-upload .el-upload-dragger {
+  width: 178px;
+  height: 178px;
 }
 
 .editor .ql-toolbar {
