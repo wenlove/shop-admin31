@@ -149,7 +149,6 @@ export default {
 
     //图片相册删除
     handleRemove(file, fileList) {
-      console.log(this.form.fileList)
       if (fileList.length > 0) {
         const arr = fileList.map(v => {
           return v;
@@ -158,11 +157,6 @@ export default {
       } else {
         this.form.fileList = [];
       }
-      console.log(this.form.fileList)
-
-      // this.form.fileList = this.form.fileList.filter(v => {
-      //   return file.name !== v.name;
-      // });
     },
     //图片相册预览
     handlePictureCardPreview(file) {
@@ -170,7 +164,7 @@ export default {
       this.dialogVisible = true;
     },
     //图片相册上传成功
-    handlePictureSuccess(res, file,fileList) {
+    handlePictureSuccess(res) {
       setTimeout(()=>{
          this.form.fileList.push(res)
       },10)

@@ -16,6 +16,11 @@ import GoodsList from './pages/GoodsList.vue';
 import CategoryList from './pages/CategoryList.vue';
 import GoodsAdd from './pages/GoodsAdd.vue';
 import GoodsEdit from './pages/GoodsEdit.vue';
+import AccountList from './pages/AccountList.vue';
+import OrderEdit from './pages/OrderEdit.vue';
+
+//导入store仓库
+import store from './store';
 
 
 //注册组件
@@ -40,6 +45,9 @@ const router = new VueRouter({
                 { path: 'category-list', component: CategoryList, meta: '栏目列表' },
                 { path: 'goods-add', component: GoodsAdd, meta: '添加商品' },
                 { path: 'goods-edit/:id', component: GoodsEdit, meta: '编辑商品' },
+                { path: 'account-list', component: AccountList, meta: '会员列表' },
+                { path: 'order-edit/:id', component: OrderEdit, meta: '编辑订单' },
+
             ]
         }
     ]
@@ -82,4 +90,5 @@ new Vue({
     render: h => h(App),
     //挂载路由
     router,
+    store
 }).$mount('#app')

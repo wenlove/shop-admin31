@@ -25,6 +25,18 @@
         </template>
       </el-menu-item>
     </el-submenu>
+    <el-submenu index="2">
+      <template slot="title">
+        <i class="el-icon-headset"></i>
+        <span>会员管理</span>
+      </template>
+
+      <el-menu-item index="2-1">
+        <template slot="title">
+          <router-link to="/admin/account-list">会员列表</router-link>
+        </template>
+      </el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
